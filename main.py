@@ -13,7 +13,7 @@ logging.basicConfig(
 
 # Funzione per ottenere gli issues da GitHub
 def fetch_issues():
-    url = f"https://api.github.com/repos/WGL-2024/WGL_repo_2024/issues"
+    url = f"https://api.github.com/repos/Rustastic/Drone/issues"
     response = requests.get(url)
     
     if response.status_code == 200:
