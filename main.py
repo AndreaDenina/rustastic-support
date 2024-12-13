@@ -28,20 +28,16 @@ def fetch_issues():
     else:
         return f"Error fetching issues: {response.status_code}"
 
-async def start(update: Update, context:ContextTypes.DEFAULT_TYPE):
+async def start(update: Update, context:ContextTypes.DEFAULT_TYPE): #change the name of the dependecy
     start_message = """\
     Rustastic: it's fantastic 🦀
-    In order to use our fantastic drone add it to 
-    the dependencies of your project
+    In order to use our fantastic drone add it to the dependencies of your project
     {here there will be a link to our crate}
     more info here: https://github.com/Rustastic/Drone/blob/main/README.md
     
-    if there are any problems you can create an issue in the /repo or 
-    contact one of us 
-    more info if you use the command /contacts
+    if there are any problems you can create an issue in the /repo or contact one of us more info if you use the command /contacts
     
-    if you want to see all the open issues of our repo 
-    you can use the command /issues
+    if you want to see all the open issues of our repo you can use the command /issues
     
     Hope this was helpful, good luck with your project🦀🦀\
     """
@@ -87,12 +83,18 @@ def main():
     application.add_handler(MessageHandler(filters.COMMAND, unknown))
     application.add_error_handler(MessageHandler(filters.TEXT,unknown))
    
-    application.run_polling()   
+    #application.run_polling()
+    
+    PORT = int(os.environ.get('PORT', '443'))
+    HOOK_URL = f"https://YOUR-CODECAPSULES-URL-HERE/{token}" #change when deployed
+    
+    application.run_webhook(
+    listen="0.0.0.0",
+    port=PORT,
+    webhook_url=HOOK_URL,
+    url_path=token
+    )
 
 
 if __name__ == '__main__':
     main()
-
-
-#text => help function
-#commands: start,help,
