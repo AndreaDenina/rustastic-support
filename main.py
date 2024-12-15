@@ -31,7 +31,7 @@ def fetch_issues():
 async def start(update: Update, context:ContextTypes.DEFAULT_TYPE): #change the name of the dependecy
     start_message = """\
     Rustastic: it's fantastic 🦀
-    In order to use our fantastic drone read the ``` README.md ```
+    In order to use our fantastic drone read the README.md
     https://github.com/Rustastic/RustasticDrone/blob/main/README.md
     
     if there are any problems you can create an issue in the /repo or contact one of us more info if you use the command /contacts
@@ -82,17 +82,7 @@ def main():
     application.add_handler(MessageHandler(filters.COMMAND, unknown))
     application.add_error_handler(MessageHandler(filters.TEXT,unknown))
    
-    #application.run_polling()
-    
-    PORT = int(os.environ.get('PORT', '443'))
-    HOOK_URL = f"https://rustastic-support-9c090ce714f2.herokuapp.com/{token}" #change when deployed
-    
-    application.run_webhook(
-    listen="0.0.0.0",
-    port=PORT,
-    webhook_url=HOOK_URL,
-    url_path=token
-    )
+    application.run_polling()
 
 
 if __name__ == '__main__':
