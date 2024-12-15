@@ -13,7 +13,7 @@ logging.basicConfig(
 
 # Funzione per ottenere gli issues da GitHub
 def fetch_issues():
-    url = f"https://api.github.com/repos/Rustastic/Drone/issues"
+    url = f"https://api.github.com/repos/Rustastic/RustasticDrone/issues"
     response = requests.get(url)
     
     if response.status_code == 200:
@@ -31,9 +31,8 @@ def fetch_issues():
 async def start(update: Update, context:ContextTypes.DEFAULT_TYPE): #change the name of the dependecy
     start_message = """\
     Rustastic: it's fantastic 🦀
-    In order to use our fantastic drone add it to the dependencies of your project
-    {here there will be a link to our crate}
-    more info here: https://github.com/Rustastic/Drone/blob/main/README.md
+    In order to use our fantastic drone read the ``` README.md ```
+    https://github.com/Rustastic/RustasticDrone/blob/main/README.md
     
     if there are any problems you can create an issue in the /repo or contact one of us more info if you use the command /contacts
     
@@ -44,10 +43,10 @@ async def start(update: Update, context:ContextTypes.DEFAULT_TYPE): #change the 
     await context.bot.send_message(chat_id= update.effective_chat.id,text= start_message)
     
 async def repo(update: Update, context:ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id= update.effective_chat.id, text= "https://github.com/Rustastic/Drone")
+    await context.bot.send_message(chat_id= update.effective_chat.id, text= "https://github.com/Rustastic/RustasticDrone")
 
 async def issues(update: Update, context:ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id= update.effective_chat.id, text= "Fecthing Issues from https://github/Rustastic/Drone")
+    await context.bot.send_message(chat_id= update.effective_chat.id, text= "Fecthing Issues from https://github/Rustastic/RustasticDrone")
     issues = fetch_issues()
     await context.bot.send_message(chat_id= update.effective_chat.id, text= issues)
 
@@ -86,7 +85,7 @@ def main():
     #application.run_polling()
     
     PORT = int(os.environ.get('PORT', '443'))
-    HOOK_URL = f"https://YOUR-CODECAPSULES-URL-HERE/{token}" #change when deployed
+    HOOK_URL = f"https://rustastic-support.heroku.com/{token}" #change when deployed
     
     application.run_webhook(
     listen="0.0.0.0",
