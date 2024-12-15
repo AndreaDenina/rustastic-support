@@ -6,7 +6,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, ContextTyp
 from dotenv import load_dotenv
 
 TOKEN = os.environ.get('TOKEN')
-PORT = int(os.environ.get('PORT',88))
+PORT = int(os.environ.get('PORT',5000))
 
 #logging
 logging.basicConfig(
