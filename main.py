@@ -85,7 +85,7 @@ def main():
     #application.run_polling()
     
     PORT = int(os.environ.get('PORT', '443'))
-    HOOK_URL = f"https://rustastic-support-9c090ce714f2.herokuapp.com//{token}" #change when deployed
+    HOOK_URL = f"https://rustastic-support-9c090ce714f2.herokuapp.com/{token}" #change when deployed
     
     application.run_webhook(
     listen="0.0.0.0",
