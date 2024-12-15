@@ -5,6 +5,9 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
 from dotenv import load_dotenv
 
+TOKEN = os.environ.get('TOKEN')
+PORT = int(os.environ.get('PORT',88))
+
 #logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -62,12 +65,8 @@ def main():
     
     load_dotenv()
     
-    token = os.getenv("BOT_TOKEN")
     
-    if not token:
-        raise ValueError("No BOT_TOKEN found in environment variables.")
-    
-    application = Application.builder().token(token).concurrent_updates(True).read_timeout(30).write_timeout(30).build()
+    application = Application.builder().token(TOKEN).concurrent_updates(True).read_timeout(30).write_timeout(30).build()
     
     print("Telegram Bot started!", flush=True)
 
@@ -82,7 +81,12 @@ def main():
     application.add_handler(MessageHandler(filters.COMMAND, unknown))
     application.add_error_handler(MessageHandler(filters.TEXT,unknown))
    
-    application.run_polling()
+    application.run_webhook(
+        listen="0.0.0.0",
+        port=int(PORT),
+        url_path=TOKEN,
+        webhook_url='https://rustastic-support-9c090ce714f2.herokuapp.com/' + TOKEN
+    )
 
 
 if __name__ == '__main__':
