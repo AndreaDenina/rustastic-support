@@ -65,7 +65,7 @@ def main():
     load_dotenv()
     
     TOKEN = os.environ.get('TOKEN')
-    PORT = int(os.environ.get('PORT',5000))
+    PORT = int(os.environ.get('PORT'))
     
     application = Application.builder().token(TOKEN).concurrent_updates(True).read_timeout(30).write_timeout(30).build()
     
