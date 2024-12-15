@@ -5,8 +5,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
 from dotenv import load_dotenv
 
-TOKEN = os.environ.get('TOKEN')
-PORT = int(os.environ.get('PORT',5000))
+
 
 #logging
 logging.basicConfig(
@@ -65,6 +64,8 @@ def main():
     
     load_dotenv()
     
+    TOKEN = os.environ.get('TOKEN')
+    PORT = int(os.environ.get('PORT',5000))
     
     application = Application.builder().token(TOKEN).concurrent_updates(True).read_timeout(30).write_timeout(30).build()
     
